@@ -2,7 +2,7 @@ version: 0.2
 
 phases:
   install:
-    commands: 
+    commands:
       - apt install curl
       - curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
       - export NVM_DIR="$HOME/.nvm"
@@ -10,15 +10,12 @@ phases:
       - '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'
       - . "$NVM_DIR/nvm.sh" && nvm install 12.20.0 && echo "node installed Devops Team"
       - npm install -g @angular/cli@9.0.7 --unsafe-perm=true --allow-root
-      - export NODE_OPTIONS="--max_old_space_size=8192"
-      - npx ng build --aot --configuration prod
   pre_build:
     commands:
       - npm i
   build:
     commands:
-      - export NODE_OPTIONS="--max_old_space_size=4096"
-      - npx ng build --aot --configuration prod --parallel
+      - npm run build
       - pwd
   post_build:
     commands:
