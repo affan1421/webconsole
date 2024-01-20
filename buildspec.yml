@@ -15,9 +15,7 @@ phases:
       - npm i
   build:
     commands:
-      - npx node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration prod
-
-      - npx ng build --configuration prod
+      - npx ng build --aot --configuration prod
       - pwd
   post_build:
     commands:
