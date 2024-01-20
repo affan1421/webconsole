@@ -1,0 +1,124 @@
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 20px 20px 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.082);
+}
+
+.h-left {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 65vh;
+    margin: 20px;
+}
+
+.left-main {
+    width: 76%;
+}
+
+.right-main {
+    width: 20%;
+}
+
+.c-item {
+    margin: 20px;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 80px;
+    width: 90px;
+    background-color: #e9b835;
+    border-radius: 15px;
+}
+
+.c-item mat-icon {
+    transform: scale(1.2);
+    color: #000;
+}
+
+.c-itemcountbadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.c-itemcount {
+    color: white;
+}
+
+.h-center {
+    display: flex;
+    flex-direction: row;
+}
+
+.stats-box {
+    position: absolute;
+    padding: 20px;
+    height: 100%;
+    text-align: right;
+    width: 100%;
+    background-color: #ffda73ea;
+    width: 200px;
+    height: 100px;
+}
+
+.containerBox {
+    position: relative;
+    display: inline-block;
+}
+
+.text-box {
+    position: absolute;
+    padding: 20px;
+    height: 100%;
+    text-align: right;
+    width: 100%;
+}
+
+.text-box:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+h4 {
+    display: inline-block;
+    width: 84px;
+    height: 27px;
+    left: 1022.6px;
+    top: 173.84px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: right;
+    color: #FFFFFF;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

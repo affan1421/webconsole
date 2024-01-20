@@ -1,0 +1,248 @@
+<div class="filter-main">
+  <h2>Filters</h2>
+  <mat-accordion style="margin-top: 25px">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="filter-row" style="margin-top: 15px">
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="selectedGender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+            </mat-select>
+            <button *ngIf="selectedGender" matSuffix mat-icon-button aria-label="Clear" (click)="selectedGender=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>State</mat-label>
+            <mat-select [(ngModel)]="selectedState" (selectionChange)="stateSelected()">
+              <mat-option *ngFor="let state of states" [value]="state._id">
+                {{state.state_name}}
+              </mat-option>
+            </mat-select>
+            <button *ngIf="selectedState" matSuffix mat-icon-button aria-label="Clear" (click)="selectedState=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <mat-select [(ngModel)]="selectedCity" [disabled]="!selectedState">
+              <mat-option *ngFor="let city of cities" [value]="city._id">
+                {{city.city_name}}
+              </mat-option>
+            </mat-select>
+            <button *ngIf="selectedCity" matSuffix mat-icon-button aria-label="Clear" (click)="selectedCity=null">
+              <mat-icon>close</mat-icon>
+            </button>
+
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Age Group</mat-label>
+            <mat-select [(ngModel)]="selectedAge">
+              <mat-option value="0-20">Less than 20</mat-option>
+              <mat-option value="20-30">20 - 30</mat-option>
+              <mat-option value="30-40">30 - 40</mat-option>
+              <mat-option value="40-50">40 - 50</mat-option>
+              <mat-option value="50-60">50 - 60</mat-option>
+              <mat-option value="60-70">60 - 70</mat-option>
+              <mat-option value="70-100">70+</mat-option>
+            </mat-select>
+            <button *ngIf="selectedAge" matSuffix mat-icon-button aria-label="Clear" (click)="selectedAge=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Blood Group</mat-label>
+            <mat-select [(ngModel)]="selectedBloodgroup">
+              <mat-option value="A+"> A+ </mat-option>
+              <mat-option value="A-"> A- </mat-option>
+              <mat-option value="B+"> B+ </mat-option>
+              <mat-option value="B-"> B- </mat-option>
+              <mat-option value="O+"> O+ </mat-option>
+              <mat-option value="0-"> O- </mat-option>
+              <mat-option value="AB+"> AB+ </mat-option>
+              <mat-option value="AB-"> AB- </mat-option>
+            </mat-select>
+            <button *ngIf="selectedBloodgroup" matSuffix mat-icon-button aria-label="Clear"
+              (click)="selectedBloodgroup=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Marital Status</mat-label>
+            <mat-select [(ngModel)]="selectedMarital">
+              <mat-option value="Married">Married</mat-option>
+              <mat-option value="Unmarried">Unmarried</mat-option>
+              <mat-option value="Divorced">Divorced</mat-option>
+              <mat-option value="Widow">Widow</mat-option>
+              <mat-option value="Widower">Widower</mat-option>
+            </mat-select>
+            <button *ngIf="selectedMarital" matSuffix mat-icon-button aria-label="Clear" (click)="selectedMarital=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Religion</mat-label>
+            <mat-select [(ngModel)]="selectedReligion">
+              <mat-option *ngFor="let religion of religions" [value]="religion">{{religion}}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedReligion" matSuffix mat-icon-button aria-label="Clear"
+              (click)="selectedReligion=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Professional
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="filter-row" style="margin-top: 15px">
+        <div class="filter-item" *ngIf="!schoolId">
+          <mat-form-field appearance="fill">
+            <mat-label>Schools</mat-label>
+            <mat-select [(ngModel)]="selectedSchool" (selectionChange)="getClasses()">
+              <mat-option *ngFor="let school of schools" [value]="school._id">{{school.schoolName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Primary Class</mat-label>
+            <mat-select [(ngModel)]="selectedClass">
+              <mat-option *ngFor="let class of classes" [value]="class.classId ? class.classId : class._id ">
+                {{class.className ? class.className :
+                class.name }}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedClass" matSuffix mat-icon-button aria-label="Clear" (click)="selectedClass=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Qualification</mat-label>
+            <mat-select [(ngModel)]="selectedQualification">
+              <mat-option *ngFor="let item of qualification" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedQualification" matSuffix mat-icon-button aria-label="Clear"
+              (click)="selectedQualification=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Experience</mat-label>
+            <mat-select [(ngModel)]="selectedExperience">
+              <mat-option value="0-2">0 - 2</mat-option>
+              <mat-option value="2-5">2 - 5</mat-option>
+              <mat-option value="5-7">5 - 7</mat-option>
+              <mat-option value="7-10">7 - 10</mat-option>
+              <mat-option value="10-90">10+</mat-option>
+            </mat-select>
+            <button *ngIf="selectedExperience" matSuffix mat-icon-button aria-label="Clear"
+              (click)="selectedExperience=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>10th</mat-label>
+            <mat-select [(ngModel)]="selectedSSLC">
+              <mat-option value="35-40">35%</mat-option>
+              <mat-option value="40-50">40% - 50%</mat-option>
+              <mat-option value="50-60">50% - 60%</mat-option>
+              <mat-option value="70-80">70% - 80%</mat-option>
+              <mat-option value="80-90">80% - 90%</mat-option>
+              <mat-option value="90-100">Above 90%</mat-option>
+            </mat-select>
+            <button *ngIf="selectedSSLC" matSuffix mat-icon-button aria-label="Clear" (click)="selectedSSLC=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>12th</mat-label>
+            <mat-select [(ngModel)]="selected12">
+              <mat-option value="35-40">35%</mat-option>
+              <mat-option value="40-50">40% - 50%</mat-option>
+              <mat-option value="50-60">50% - 60%</mat-option>
+              <mat-option value="70-80">70% - 80%</mat-option>
+              <mat-option value="80-90">80% - 90%</mat-option>
+              <mat-option value="90-100">Above 90%</mat-option>
+            </mat-select>
+            <button *ngIf="selected12" matSuffix mat-icon-button aria-label="Clear" (click)="selected12=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Graduation</mat-label>
+            <mat-select [(ngModel)]="selectedgraduation">
+              <mat-option value="35-40">35%</mat-option>
+              <mat-option value="40-50">40% - 50%</mat-option>
+              <mat-option value="50-60">50% - 60%</mat-option>
+              <mat-option value="70-80">70% - 80%</mat-option>
+              <mat-option value="80-90">80% - 90%</mat-option>
+              <mat-option value="90-100">Above 90%</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Master</mat-label>
+            <mat-select [(ngModel)]="selectedmaster">
+              <mat-option value="35-0">35%</mat-option>
+              <mat-option value="40-50">40% - 50%</mat-option>
+              <mat-option value="50-60">50% - 60%</mat-option>
+              <mat-option value="70-80">70% - 80%</mat-option>
+              <mat-option value="80-90">80% - 90%</mat-option>
+              <mat-option value="90-100">Above 90%</mat-option>
+            </mat-select>
+            <button *ngIf="selectedmaster" matSuffix mat-icon-button aria-label="Clear" (click)="selectedmaster=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div style="display: flex;flex-direction:row;justify-content:space-between">
+
+    <button mat-button (click)="filter()" mat-flat-button color="primary"
+      style="color: #000;margin-top: 20px;">Filter</button>
+  </div>
+
+</div>

@@ -1,0 +1,122 @@
+<h3>Promotion</h3>
+
+<div class="filter-row">
+  <!-- Class Filter -->
+  <mat-form-field appearance="fill" class="filter-item">
+    <mat-select (selectionChange)="getSections(selectedclass)" [(value)]="selectedclass">
+      <mat-option *ngIf="!selectedclass" disabled selected>Select Class</mat-option>
+      <mat-option *ngFor="let item of classes" [value]="item.classId">{{item.className}}</mat-option>
+      <mat-option *ngIf="classes.length == 0" disabled>No classes Available</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Section -->
+  <mat-form-field appearance="fill" class="filter-item">
+    <mat-select [(ngModel)]="selectedsection">
+      <mat-option *ngIf="!selectedsection" disabled>Select Section</mat-option>
+      <mat-option *ngFor="let item of sections" [value]="item.id">{{item.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button mat-flat-button color="primary" style="color: #000;margin-top: 20px;"
+    (click)="fetchStudents()">Fetch
+    Students</button>
+</div>
+
+<hr />
+
+<div class="filter-row">
+  <h3>Select Default Class</h3>
+  <h6>All Students will be promoted to this Class and Section</h6>
+  <!-- Class Filter -->
+  <mat-form-field appearance="fill" class="filter-item">
+    <mat-select (selectionChange)="getDsections(dselectedclass)" [(value)]="dselectedclass">
+      <mat-option *ngIf="!dselectedclass" disabled selected>Select Class</mat-option>
+      <mat-option *ngFor="let item of dclasses" [value]="item.classId">{{item.className}}</mat-option>
+      <mat-option *ngIf="classes.length == 0" disabled>No classes Available</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Section -->
+  <mat-form-field appearance="fill" class="filter-item">
+    <mat-select [(ngModel)]="dselectedsection">
+      <mat-option *ngIf="!dselectedsection" disabled>Select Section</mat-option>
+      <mat-option *ngFor="let item of dsections" [value]="item.id">{{item.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button mat-flat-button color="primary" style="color: #000;margin-top: 20px;" (click)="addDefault()">
+    Add Default</button>
+</div>
+
+<div>
+  <div class="search">
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Search columns" #input (keyup)="applyFilter($event)">
+    </mat-form-field>
+  </div>
+  <div class="teacher-table">
+    <div class="mat-elevation-z8" #TABLE>
+      <table mat-table [dataSource]="dataSource" style="width: 100%;">
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox (change)='checkStudent(element)' [(ngModel)]="element.status"></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Phone Column -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> Phone </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <!-- Class Column -->
+        <ng-container matColumnDef="class" class="tdselector">
+          <th mat-header-cell *matHeaderCellDef> Class </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field appearance="fill" class="filter-item">
+              <mat-select [(value)]="element.class" (selectionChange)="classChanged(element.class)">
+                <mat-option *ngIf="!selectedclass" disabled selected>Select Class</mat-option>
+                <mat-option *ngFor="let item of classes" [value]="item.classId">{{item.className}}</mat-option>
+                <mat-option *ngIf="classes.length == 0" disabled>No classes Available</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <!-- Section Column -->
+        <ng-container matColumnDef="section" class="tdselector">
+          <th mat-header-cell *matHeaderCellDef> Section </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field appearance="fill" class="filter-item">
+              <mat-select [(value)]="element.section">
+                <mat-option *ngIf="!selectedsection" disabled>Select Section</mat-option>
+                <mat-option *ngFor="let item of getSectionsinTable(element.class)"
+                  [value]="item.id">{{item.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20, 100,resultsLength]" [length]="resultsLength"
+        (page)="onPageFired($event)">
+      </mat-paginator>
+
+    </div>
+    <button mat-button mat-flat-button color="primary" style="color: #000;margin-top: 20px;"
+      (click)="promote()">Promote</button>
+  </div>
+</div>

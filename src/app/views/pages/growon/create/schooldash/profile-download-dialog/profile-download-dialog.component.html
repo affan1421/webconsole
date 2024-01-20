@@ -1,0 +1,374 @@
+<div class="close">
+  <button mat-button mat-flat-button color="primary" (click)="close()"><mat-icon>close</mat-icon></button>
+</div>
+<div id="print-section">
+  <div class="main">
+    <div class="header">
+      <div class="profile">
+        <img *ngIf="data.profile_image" [src]="data.profile_image" />
+        <img *ngIf="!data.profile_image" src="../../../../../../../assets/media/growon/logos/profilePicLogo.png" />
+      </div>
+      <div class="name-role">
+        <div class="name">
+          {{data.name}}
+        </div>
+        <div class="role">
+          {{data.designation.toUpperCase()}}
+        </div>
+      </div>
+
+    </div>
+    <div class="content">
+      <div class="section">
+        Personal Details
+      </div>
+      <hr />
+
+      <div class="personal-box">
+        <div class="row">
+          <div class="single-data-item">
+            <b>Gender </b>
+            <br />
+            {{data.gender ? data.gender : '-'}}
+          </div>
+          <div class="single-data-item">
+            <b>D.O.B </b>
+            <br />
+            {{data.dob ? data.dob : '-' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Contact Number </b>
+            <br />
+            {{data.username ? data.username : '-'}}
+          </div>
+          <div class="single-data-item">
+            <b>Email </b>
+            <br />
+            {{data.email ? data.email : '-'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Country </b>
+            <br />
+            {{data.country ? data.country.country_name : '-'}}
+          </div>
+          <div class="single-data-item">
+            <b>State </b>
+            <br />
+            {{data.state ? data.state.state_name : '-'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>City </b>
+            <br />
+            {{data.city ? data.city.city_name : '-'}}
+          </div>
+          <div class="single-data-item">
+            <b>Pincode</b>
+            <br />
+            {{data.pincode ? data.pincode : '-'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Address</b>
+            <br />
+            {{data.address ? data.address : '-' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Aadhar No.</b>
+            <br />
+            {{data.aadhar_card ? data.aadhar_card : '-' }}
+          </div>
+          <div class="single-data-item">
+            <b>Blood Group</b>
+            <br />
+            {{data.blood_gr ? data.blood_gr : '-' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Mother Tongue</b>
+            <br />
+            {{data.mother_tounge ? data.mother_tounge : '-' }}
+          </div>
+          <div class="single-data-item">
+            <b>Religion</b>
+            <br />
+            {{data.religion ? data.religion : '-' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Caste</b>
+            <br />
+            {{data.caste ? data.caste : '-' }}
+          </div>
+          <div class="single-data-item">
+            <b>Qualification</b>
+            <br />
+            {{data.qualification ? data.qualification : '-' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Teaching Experience</b>
+            <br />
+            {{data.experience ? data.experience : '-' }} Years
+          </div>
+          <div class="single-data-item">
+            <b>Marital Status</b>
+            <br />
+            {{data.marital_status ? data.marital_status : '-' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>PF Number</b>
+            <br />
+            {{data.pf_number ? data.pf_number : '-' }}
+          </div>
+          <div class="single-data-item">
+            <b>ESI Number</b>
+            <br />
+            {{data.esi_number ? data.esi_number : '-' }}
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="section">
+        Education
+      </div>
+      <hr />
+      <div class="personal-box">
+        <div class="education-data-item" *ngIf="data?.ten_details?.school">
+          <div class="row">
+            <b><u>10th Details</u></b> {{data?.ten_details?.Attach_doc ? ' (Document Attached)' :
+            ' (Document Not Attached) '}}
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>School Name</b>
+              <br />
+              {{data.ten_details.school ? data.ten_details.school : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Board</b>
+              <br />
+              {{data.ten_details.Board ? data.ten_details.Board : '-' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>Scored Pencentage</b>
+              <br />
+              {{data.ten_details.percentage ? data.ten_details.percentage + '%': '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Year of Passing</b>
+              <br />
+              {{data.ten_details.year_of_passing ? data.ten_details.year_of_passing : '-' }}
+            </div>
+
+          </div>
+          <div class="row" *ngIf="data?.ten_details?.Attach_doc">
+            <div class="single-data-item">
+              <a [href]="data.ten_details.Attach_doc">Download</a>
+              <br />
+
+            </div>
+          </div>
+        </div>
+        <div class="education-data-item" *ngIf="data?.twelve_details?.school">
+          <div class="row">
+            <b><u>12th Details</u></b>{{data.twelve_details.Attach_doc ? ' (Document Attached)' :
+            ' (Document Not Attached) '}}
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>College Name</b>
+              <br />
+              {{data.twelve_details.school ? data.twelve_details.school : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Board</b>
+              <br />
+              {{data.twelve_details.Board ? data.twelve_details.Board : '-' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>Scored Pencentage</b>
+              <br />
+              {{data.twelve_details.percentage ? data.twelve_details.percentage+ '%' : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Year of Passing</b>
+              <br />
+              {{data.twelve_details.year_of_passing ? data.twelve_details.year_of_passing : '-' }}
+            </div>
+
+          </div>
+        </div>
+        <div class="education-data-item" *ngIf="data?.graduation_details?.school">
+          <div class="row">
+            <b><u>Graduation Details</u></b>
+            {{data.graduation_details.Attach_doc ? '(Document Attached)' : ' (Document Not Attached) '}}
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>College Name</b>
+              <br />
+              {{data.graduation_details.school ? data.graduation_details.school : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Board</b>
+              <br />
+              {{data.graduation_details.Board ? data.graduation_details.Board : '-' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>Scored Pencentage</b>
+              <br />
+              {{data.graduation_details.percentage ? data.graduation_details.percentage+ '%' : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Year of Passing</b>
+              <br />
+              {{data.graduation_details.year_of_passing ? data.graduation_details.year_of_passing : '-' }}
+            </div>
+
+          </div>
+        </div>
+        <div class="education-data-item" *ngIf="data?.masters_details?.school">
+          <div class="row">
+            <b><u>Masters Details</u></b>{{data.masters_details.Attach_doc ? '(Document Attached)' :
+            ' (Document Not Attached) ' }}
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>College Name</b>
+              <br />
+              {{data.masters_details.school ? data.masters_details.school : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Board</b>
+              <br />
+              {{data.masters_details.Board ? data.masters_details.Board : '-' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>Scored Pencentage</b>
+              <br />
+              {{data.masters_details.percentage ? data.masters_details.percentage+ '%' : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Year of Passing</b>
+              <br />
+              {{data.masters_details.year_of_passing ? data.masters_details.year_of_passing : '-' }}
+            </div>
+
+          </div>
+        </div>
+        <div class="education-data-item" *ngIf="data?.other_education?.school">
+          <div class="row">
+            <b><u>Other Education</u></b>{{data?.other_education?.Attach_doc ? '(Document Attached)':
+            '(Document Not Attached)'}}
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>College Name</b>
+              <br />
+              {{data?.other_education.school ? data?.other_education.school : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Board</b>
+              <br />
+              {{data.other_education.Board ? data.other_education.Board : '-' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="single-data-item">
+              <b>Scored Pencentage</b>
+              <br />
+              {{data.other_education.percentage ? data.other_education.percentage+ '%' : '-' }}
+            </div>
+            <div class="single-data-item">
+              <b>Year of Passing</b>
+              <br />
+              {{data.other_education.year_of_passing ? data.other_education.year_of_passing : '-' }}
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="section">
+        Experience
+      </div>
+      <hr />
+      <div *ngFor="let experience of data.experience_list" class="personal-box">
+        <div class="row">
+          <div class="single-data-item">
+            <b>Institution Name </b>
+            <br />
+            {{experience.institution_name}}
+          </div>
+          <div class="single-data-item">
+            <b>Served as </b>
+            <br />
+            {{experience.served_as}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Joining Date</b>
+            <br />
+            {{experience.joining_date }}
+          </div>
+          <div class="single-data-item">
+            <b>Relieve Date</b>
+            <br />
+            {{experience.reliving_date}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="single-data-item">
+            <b>Served for</b>
+            <br />
+            {{experience.served_for.toString() + ' Years'}}
+          </div>
+          <div class="single-data-item">
+            <b>Document </b>
+            <br />
+            <span *ngIf="experience?.experience_certificate">
+              Document Attached
+            </span>
+            <span *ngIf="!experience?.experience_certificate" style="color:#393941">
+              Document Not Attached
+            </span>
+          </div>
+
+        </div>
+        <hr />
+      </div>
+    </div>
+    <div class="footer">
+      <span>{{data.school_id.schoolName}}</span>
+    </div>
+  </div>
+</div>
+<div class="download-box">
+  <button printSectionId="print-section" ngxPrint [useExistingCss]="true" mat-button mat-flat-button
+    color="primary">Download</button>
+</div>

@@ -1,0 +1,243 @@
+<div class="filter-main">
+  <h2>Filters</h2>
+
+  <mat-accordion style="margin-top: 25px;">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="filter-row" style="margin-top: 25px;">
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="selectedGender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+            </mat-select>
+            <button *ngIf="selectedGender" matSuffix mat-icon-button aria-label="Clear" (click)="selectedGender=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>State</mat-label>
+            <mat-select [(ngModel)]="selectedState" (selectionChange)="stateSelected()">
+              <mat-option *ngFor="let state of states" [value]="state._id">
+                {{state.state_name}}
+              </mat-option>
+            </mat-select>
+            <button *ngIf="selectedState" matSuffix mat-icon-button aria-label="Clear" (click)="selectedState=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <mat-select [(ngModel)]="selectedCity" [disabled]="!selectedState">
+              <mat-option *ngFor="let city of cities" [value]="city._id">
+                {{city.city_name}}
+              </mat-option>
+            </mat-select>
+            <button *ngIf="selectedCity" matSuffix mat-icon-button aria-label="Clear" (click)="selectedCity=null">
+              <mat-icon>close</mat-icon>
+            </button>
+
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Mode of Transportation</mat-label>
+            <mat-select [(ngModel)]="selectedtransportation">
+              <mat-option *ngFor="let item of transportationMode" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedtransportation" matSuffix mat-icon-button aria-label="Clear"
+              (click)="selectedtransportation=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Blood Group</mat-label>
+            <mat-select [(ngModel)]="selectedBloodgroup">
+              <mat-option value="A+"> A+ </mat-option>
+              <mat-option value="A-"> A- </mat-option>
+              <mat-option value="B+"> B+ </mat-option>
+              <mat-option value="B-"> B- </mat-option>
+              <mat-option value="O+"> O+ </mat-option>
+              <mat-option value="0-"> O- </mat-option>
+              <mat-option value="AB+"> AB+ </mat-option>
+              <mat-option value="AB-"> AB- </mat-option>
+            </mat-select>
+            <button *ngIf="selectedBloodgroup" matSuffix mat-icon-button aria-label="Clear"
+              (click)="selectedBloodgroup=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Medical Condition</mat-label>
+            <mat-select [(ngModel)]="selectedMedical">
+              <mat-option *ngFor="let item of medicalConditions" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedMedical" matSuffix mat-icon-button aria-label="Clear" (click)="selectedMedical=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Child Wear Glasses</mat-label>
+            <mat-select [(ngModel)]="selectedGlasses">
+              <mat-option value="Yes">Yes</mat-option>
+              <mat-option value="No">No</mat-option>
+            </mat-select>
+            <button *ngIf="selectedGlasses" matSuffix mat-icon-button aria-label="Clear" (click)="selectedGlasses=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Religion</mat-label>
+            <mat-select [(ngModel)]="selectedReligion">
+              <mat-option *ngFor="let religion of religions" [value]="religion">{{religion}}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedReligion" matSuffix mat-icon-button aria-label="Clear"
+              (click)="selectedReligion=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Academic Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="filter-row" >
+        <div class="filter-item" *ngIf="!schoolId">
+          <mat-form-field appearance="fill">
+            <mat-label>Schools</mat-label>
+            <mat-select [(ngModel)]="selectedSchool" (selectionChange)="getClasses()">
+              <mat-option *ngFor="let school of schools" [value]="school._id">{{school.schoolName}}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedSchool" matSuffix mat-icon-button aria-label="Clear" (click)="selectedSchool=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Class</mat-label>
+            <mat-select [(ngModel)]="selectedClass" (selectionChange)="classSelected()">
+              <mat-option *ngFor="let class of classes" [value]="class.classId ? class.classId : class._id ">
+                {{class.className ? class.className :
+                class.name }}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedClass" matSuffix mat-icon-button aria-label="Clear" (click)="selectedClass=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item" *ngIf="schoolId">
+          <mat-form-field appearance="fill">
+            <mat-label>Section</mat-label>
+            <mat-select [(ngModel)]="selectedSection">
+              <mat-option *ngFor="let sec of sections" [value]="sec._id">
+                {{sec.name}}</mat-option>
+            </mat-select>
+            <button *ngIf="selectedSection" matSuffix mat-icon-button aria-label="Clear" (click)="selectedSection=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="filter-item">
+          <mat-form-field appearance="fill">
+            <mat-label>RTE Number</mat-label>
+            <input matInput [(ngModel)]="selectedRTE" />
+            <button *ngIf="selectedRTE" matSuffix mat-icon-button aria-label="Clear" (click)="selectedExperience=null">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Parent Details
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="filter-row">
+      <div class="filter-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Has Parent</mat-label>
+          <mat-select [(ngModel)]="hasParent" (selectionChange)="hasParentchanged()">
+            <mat-option value='yes'>Yes</mat-option>
+            <mat-option value='no'>No</mat-option>
+          </mat-select>
+          <button *ngIf="hasParent" matSuffix mat-icon-button aria-label="Clear" (click)="hasParent=null">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="filter-item" *ngIf="hasParent === 'yes'">
+        <mat-form-field appearance="fill">
+          <mat-label>Father Qualification</mat-label>
+          <mat-select [(ngModel)]="selectedFatherQualification">
+            <mat-option *ngFor="let item of qualification" [value]="item">{{item}}</mat-option>
+          </mat-select>
+          <button *ngIf="selectedFatherQualification" matSuffix mat-icon-button aria-label="Clear"
+            (click)="selectedFatherQualification=null">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="filter-item" *ngIf="hasParent === 'yes'">
+        <mat-form-field appearance="fill">
+          <mat-label>Mother Qualification</mat-label>
+          <mat-select [(ngModel)]="selectedMotherQualification">
+            <mat-option *ngFor="let item of qualification" [value]="item">{{item}}</mat-option>
+          </mat-select>
+          <button *ngIf="selectedMotherQualification" matSuffix mat-icon-button aria-label="Clear"
+            (click)="selectedMotherQualification=null">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="filter-item" *ngIf="hasParent === 'no'">
+        <mat-form-field appearance="fill">
+          <mat-label>Guardian Qualification</mat-label>
+          <mat-select [(ngModel)]="selectedGuardianQualification">
+            <mat-option *ngFor="let item of qualification" [value]="item">{{item}}</mat-option>
+          </mat-select>
+          <button *ngIf="selectedGuardianQualification" matSuffix mat-icon-button aria-label="Clear"
+            (click)="selectedGuardianQualification=null">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <div style="display: flex;flex-direction:row;justify-content:flex-end">
+
+    <button mat-button (click)="filter()" mat-flat-button color="primary"
+      style="color: #000;margin-top: 20px;">Filter</button>
+  </div>
+
+</div>

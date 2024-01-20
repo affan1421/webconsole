@@ -1,0 +1,113 @@
+<h1>Bulk Profile Update</h1>
+<br />
+<div class="search-container">
+  <div class="filter-row" style="margin-top: 25px;">
+    <div class="filter-item">
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="search" />
+      </mat-form-field>
+    </div>
+    <div class="filter-item">
+      <mat-form-field appearance="fill">
+        <mat-label>Class</mat-label>
+        <mat-select [(ngModel)]="selectedClass" (selectionChange)="classSelected()">
+          <mat-option *ngFor="let class of classes" [value]="class.classId ? class.classId : class._id ">
+            {{class.className ? class.className :
+            class.name }}</mat-option>
+        </mat-select>
+        <button *ngIf="selectedClass" matSuffix mat-icon-button aria-label="Clear" (click)="clear('class')">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="filter-item">
+      <mat-form-field appearance="fill">
+        <mat-label>Section</mat-label>
+        <mat-select [(ngModel)]="selectedSection">
+          <mat-option *ngFor="let sec of sections" [value]="sec._id">
+            {{sec.name}}</mat-option>
+        </mat-select>
+        <button *ngIf="selectedSection" matSuffix mat-icon-button aria-label="Clear" (click)="clear('section')">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="filter-item">
+      <button mat-button (click)="applyFilter()" mat-flat-button color="primary"
+        style="color: #000;height: 50px;">Filter</button>
+    </div>
+  </div>
+</div>
+<div class="teacher-table">
+  <div class="mat-elevation-z8" #TABLE>
+    <table mat-table [dataSource]="dataSource" style="width: 100%;">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element">
+          <!-- Add the title attribute to the profile image -->
+          <div
+            style="display: flex; margin:0px 20px; flex-direction: row; align-items: center; justify-content: flex-start;">
+            <img *ngIf="element.profile_image" [src]='element.profile_image' height="30px" width="30px"
+              style="border-radius: 100px;" />
+
+            <img *ngIf="!element.profile_image" src='../../../../../../assets/media/growon/user.png' height="30px"
+              style="border-radius: 100px" width=" 30px" />
+            <span style="margin:0px 20px;">{{element.name}}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <!-- Gender Column -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender ? (element.gender | titlecase) : '-'}} </td>
+      </ng-container>
+
+      <!-- Class Column -->
+      <ng-container matColumnDef="class">
+        <th mat-header-cell *matHeaderCellDef> Class </th>
+        <td mat-cell *matCellDef="let element"> {{element.class ? element.class?.name : '-'}} </td>
+      </ng-container>
+
+      <!-- Section Column -->
+      <ng-container matColumnDef="section">
+        <th mat-header-cell *matHeaderCellDef> Section </th>
+        <td mat-cell *matCellDef="let element"> {{element.section ? element.section?.name : '-'}} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.profile_image">
+            <button mat-flat-button color="primary" (click)="deleteProfile(element._id)">
+              <mat-icon> delete </mat-icon>
+            </button>
+          </div>
+          <div *ngIf="!element.profile_image">
+            <button mat-flat-button color="primary" (click)="openFilePicker($event, element._id)"
+              [disabled]="!schoolId">
+              <mat-icon> publish </mat-icon>
+            </button>
+            <input #fileInput type="file" accept="image/*" style="display: none;" (change)="onFileUpload($event)" />
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator [pageSizeOptions]="[5 , 10, 20, 100]" [length]="resultsLength"
+      (page)="onPageFired($event)" [pageSize]="pageSize" [pageIndex]="pageIndex">
+    </mat-paginator>
+  </div>
+</div>

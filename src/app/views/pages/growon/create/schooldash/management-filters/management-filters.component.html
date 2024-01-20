@@ -1,0 +1,136 @@
+<h3>All Management</h3>
+<div style="display: flex;flex-direction: row;" *ngIf="schoolId">
+  <div class="chart-container">
+    <h3>Blood Group</h3>
+    <canvas id="blood-data-chart" style="padding-bottom: 20px;"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Experience</h3>
+    <canvas id="expCanvas" style="padding-bottom: 20px;"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Marital Status</h3>
+    <canvas id="msCanvas" style="padding-bottom: 20px;"></canvas>
+  </div>
+</div>
+
+<div style="display: flex;flex-direction: row;" *ngIf="schoolId">
+
+  <div class="chart-container">
+    <h3>Qualification</h3>
+    <canvas id="qCanvas" style="padding-bottom: 20px;"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Mother Tongue</h3>
+    <canvas id="mtCanvas" style="padding-bottom: 20px;"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Religion</h3>
+    <canvas id="rCanvas" style="padding-bottom: 20px;"></canvas>
+  </div>
+</div>
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;">
+  <div>
+    <button mat-button (click)="openDialog()" mat-flat-button color="primary" style="color: #000;margin-top: 20px;">
+      <mat-icon>filter_list</mat-icon>Filter
+    </button>
+    <button mat-flat-button color="primary" style="color: #000;margin-top: 20px;" *ngIf="filters"
+      (click)="clearFilters()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-chip-list>
+    <mat-chip selected
+      style="color: #000;background-color: white;box-shadow: 0px 0px 05px 01px rgba(0, 0, 0, 0.068);margin-top: 25px;">
+      {{resultsLength}} Results Found</mat-chip>
+  </mat-chip-list>
+</div>
+<div style="margin-top: 20px;display: flex;flex-direction: row;">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="" [(ngModel)]="searchText">
+    <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="clearText()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-button (click)="applyFilter(1,5)" mat-flat-button color="primary"
+    style="color: #000;margin: 0px 0px 19px 20px">
+    <mat-icon>search</mat-icon>
+  </button>
+  <button mat-button (click)="ExportTOExcel()" mat-flat-button color="primary"
+    style="color: #000;margin: 0px 0px 19px 20px">
+    <mat-icon>
+      arrow_downward
+    </mat-icon>
+  </button>
+</div>
+<div class="teacher-table">
+  <div class="mat-elevation-z8" #TABLE>
+    <table mat-table [dataSource]="dataSource" style="width: 100%;">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <!-- Gender Column -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender ? (element.gender | titlecase) : '-'}} </td>
+      </ng-container>
+
+      <!-- School Column -->
+      <ng-container matColumnDef="school">
+        <th mat-header-cell *matHeaderCellDef> School </th>
+        <td mat-cell *matCellDef="let element"> {{element.school_id?.schoolName}} </td>
+      </ng-container>
+
+
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-slide-toggle [checked]="element.activeStatus" (click)="deactivateAccount(element)">
+          </mat-slide-toggle>
+        </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-flat-button color="primary" (click)="edit(element)" [disabled]="!schoolId">
+            <mat-icon> edit </mat-icon>
+          </button>
+          <button mat-flat-button color="primary" (click)="deleteUser(element)">
+            <mat-icon> delete </mat-icon>
+          </button>
+          <button mat-flat-button color="primary" (click)="downloadProfile(element)">
+            <mat-icon> <b>arrow_downward</b></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 100,resultsLength]" [length]="resultsLength"
+      (page)="onPageFired($event)">
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<h3>Attendance Configuration</h3>
+<div class="main">
+  <div class="row">
+    <mat-checkbox class="item " [(ngModel)]="showMap" *ngIf="!showMap">Update Map</mat-checkbox>
+  </div>
+  <div class="row">
+    <div class="item w100" *ngIf="showMap">
+      <mat-form-field appearance="fill">
+        <mat-label>Map Link</mat-label>
+        <input matInput placeholder="Map Link" [(ngModel)]="map" (change)="extractLocation()">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="item w33">
+      <mat-form-field appearance="fill">
+        <mat-label>Longitude</mat-label>
+        <input matInput placeholder="Longitude" [(ngModel)]="longitude">
+      </mat-form-field>
+    </div>
+
+    <div class="item w33">
+      <mat-form-field appearance="fill">
+        <mat-label>Latitude</mat-label>
+        <input matInput placeholder="Latitude" [(ngModel)]="latitude">
+      </mat-form-field>
+    </div>
+
+    <div class="item w33">
+      <mat-label>Radius - {{radius}}m</mat-label>
+      <mat-slider min="0" max="1000" step="5" showTickMarks discrete (change)="onRadiusChange($event)" [value]="radius">
+        <input matSliderThumb>
+      </mat-slider>
+    </div>
+
+  </div>
+  <h3>Timings Update</h3>
+  <div class="timings-row">
+    <div>
+      <mat-form-field appearance="fill" class="time-item">
+        <mat-label>Start Time </mat-label>
+        <input matInput aria-label="default time" [ngxTimepicker]="defaultValue" [(ngModel)]="startTime" readonly>
+        <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" class="time-item">
+        <mat-label>School Last Time to Login</mat-label>
+        <input matInput aria-label="default time" [ngxTimepicker]="defaultValue2" [(ngModel)]="loginTime" readonly>
+        <ngx-material-timepicker #defaultValue2></ngx-material-timepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" class="time-item">
+        <mat-label>School Logout Time</mat-label>
+        <input matInput aria-label="default time" [ngxTimepicker]="defaultValue3" [(ngModel)]="logoutTime" readonly>
+        <ngx-material-timepicker #defaultValue3></ngx-material-timepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <button mat-flat-button color="primary" style="color: #000;height: 7%;margin:0px 15px;margin-bottom:20px"
+    (click)="update()">Update</button>
+</div>

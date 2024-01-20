@@ -1,0 +1,22 @@
+.main {
+    width: 500px;
+    height: 200px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btns {
+    margin-top: 25px;
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn {
+    background-color: #ffc04c;
+    color: #000;
+}

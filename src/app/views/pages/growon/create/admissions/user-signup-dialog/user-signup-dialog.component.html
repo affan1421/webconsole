@@ -1,0 +1,8 @@
+<div class="main">
+  <h3>{{isActive ? 'Deactivate ': 'Activate' }} Self Signup </h3>
+  <p>All Users in app will {{isActive ?'not be able': 'be able ' }} to self signup in Mobile App, {{isActive ?'': 'with admin approval' }}</p>
+  <div class="btns">
+    <button mat-button (click)="cancel()" class="btn"> Cancel </button>
+    <button mat-button (click)="confirmed()" class="btn"> {{isActive ? 'Deactivate': 'Activate ' }} </button>
+  </div>
+</div>

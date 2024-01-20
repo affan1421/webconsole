@@ -1,0 +1,8 @@
+<div class="main">
+  <h3>{{message}}</h3>
+  <div class="action">
+    <button *ngIf="hasAction" (click)="action(false)">Cancel</button>
+    <button *ngIf="hasAction" (click)="action(true)">Yes</button>
+    <button *ngIf="!hasAction" (click)="action(false)">Close</button>
+  </div>
+</div>

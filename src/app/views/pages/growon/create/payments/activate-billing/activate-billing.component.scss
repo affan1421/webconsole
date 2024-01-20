@@ -1,0 +1,12 @@
+.stats {
+    display: flex;
+    flex-direction: row;
+}
+
+.stats-card {
+    width: 25%;
+    margin: 20px;
+}
+.date-selector mat-form-field{
+    margin: 05px 25px;
+}

@@ -1,0 +1,38 @@
+.filter-main {
+    padding: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: scroll;
+}
+
+.filter-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.filter-item {
+    z-index: 100;
+    width: 23%;
+    margin: 0px 10px;
+}
+
+.teacher-table {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.mat-form-field {
+    display: block;
+    position: relative;
+    text-align: left;
+}
+
+// ::ng-deep .cdk-overlay-connected-position-bounding-box {
+//     z-index: 10000 !important;
+// }
+
+// ::ng-deep .cdk-global-overlay-wrapper {
+//     z-index: 1000 !important;
+// }

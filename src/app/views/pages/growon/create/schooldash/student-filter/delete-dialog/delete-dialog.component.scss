@@ -1,0 +1,20 @@
+.main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #ffc30a;
+    font-family: Poppins;
+    font-weight: 500;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+}

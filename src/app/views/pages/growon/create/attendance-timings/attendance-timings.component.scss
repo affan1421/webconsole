@@ -1,0 +1,36 @@
+.row {
+    margin: 25px 0px 25px 05px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.timings-row {
+    margin: 25px 0px 25px 05px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item {
+    margin: 0px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.time-item {
+    margin: 0px 20px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.w50 {
+    width: 40%;
+}
+
+.w33 {
+    width: 30%;
+}

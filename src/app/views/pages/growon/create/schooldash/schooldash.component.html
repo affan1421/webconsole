@@ -1,0 +1,139 @@
+<div class="header-container">
+  <div class="h-left" *ngIf="isOwner">
+    <h1>{{schoolDetails.schoolName}}</h1>
+    <h5>{{schoolDetails.schoolCode}}</h5>
+  </div>
+  <div class="h-center">
+    <!-- Assignment -->
+    <div class="c-item">
+      <div class="c-itemcountbadge">
+        <div class="c-itemcount">
+          {{assignment ? assignment : '0'}}
+        </div>
+      </div>
+      <mat-icon>
+        assignment
+      </mat-icon>
+      <div>
+        Assignment
+      </div>
+    </div>
+    <!-- Announcement -->
+    <div class="c-item">
+      <div class="c-itemcountbadge">
+        <div class="c-itemcount">
+          {{announcement ? announcement : '0'}}
+        </div>
+      </div>
+      <mat-icon>
+        assignment
+      </mat-icon>
+      <div>
+        Announcement
+      </div>
+    </div>
+    <!-- LivePoll -->
+    <div class="c-item">
+      <div class="c-itemcountbadge">
+        <div class="c-itemcount">
+          {{livePoll ? livePoll : '0'}}
+        </div>
+      </div>
+      <mat-icon>
+        assignment
+      </mat-icon>
+      <div>
+        LivePoll
+      </div>
+    </div>
+    <!-- Event -->
+    <div class="c-item">
+      <div class="c-itemcountbadge">
+        <div class="c-itemcount">
+          {{event ? event : '0'}}
+        </div>
+      </div>
+      <mat-icon>
+        assignment
+      </mat-icon>
+      <div>
+        Event
+      </div>
+    </div>
+    <!-- Check List -->
+    <div class="c-item">
+      <div class="c-itemcountbadge">
+        <div class="c-itemcount">
+          {{check_list ? check_list : '0'}}
+        </div>
+      </div>
+      <mat-icon>
+        assignment
+      </mat-icon>
+      <div>
+        Check List
+      </div>
+    </div>
+  </div>
+  <div class="h-right" *ngIf="!isOwner">
+    <h1>growOn Admin</h1>
+  </div>
+  <div class="h-right">
+    <img [src]="schoolDetails.schoolImage" height="100px" width="100px">
+  </div>
+</div>
+<div class="main">
+  <div class="left-main">
+    <!-- <h3>Filters</h3> -->
+    <mat-tab-group style="width:95%">
+      <mat-tab label="Teacher">
+        <kt-teacher-filter></kt-teacher-filter>
+      </mat-tab>
+      <mat-tab label="Student">
+        <kt-student-filter></kt-student-filter>
+      </mat-tab>
+    </mat-tab-group>
+
+  </div>
+  <div class="right-main">
+    <div class="containerBox">
+      <div class="text-box">
+        <h4>
+          <div>
+            {{totalStudent}}
+          </div>
+          <div>Students</div>
+        </h4>
+      </div>
+      <span>
+        <img src="\assets\media\dashboard\Branches.jpg" alt="..." />
+      </span>
+    </div>
+    <div class="containerBox">
+      <div class="text-box">
+        <h4>
+          <div>
+            200
+          </div>
+          <div>Faculty</div>
+        </h4>
+      </div>
+      <span>
+        <img src="\assets\media\growon\logos\student.png" alt="..." />
+      </span>
+    </div>
+    <div class="containerBox">
+      <div class="text-box">
+        <h4>
+          <div>
+            200
+          </div>
+          <div>Branches</div>
+        </h4>
+      </div>
+      <span>
+        <img src="\assets\media\dashboard\Faculty.jpg" alt="..." />
+      </span>
+    </div>
+  </div>
+</div>
