@@ -15,7 +15,7 @@ phases:
       - npm i
   build:
     commands:
-      - npm run build
+      - npm run prodBuild
       - pwd
   post_build:
     commands:
