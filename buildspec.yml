@@ -2,9 +2,8 @@ version: 0.2
 
 phases:
   install:
-    commands:
-      - apt update 
-      - apt install curl
+    commands: 
+      - yum install curl -y
       - curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
       - export NVM_DIR="$HOME/.nvm"
       - '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
