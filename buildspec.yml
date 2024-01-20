@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 10.13.0
+      nodejs: 18.19.0
     commands: 
       - apt install curl
       - curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
