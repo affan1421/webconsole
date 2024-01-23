@@ -20,6 +20,7 @@ phases:
       - npx -n=--max-old-space-size=4096 ng build --aot --configuration prod
       - pwd
       - ls
+      - cd src && ls
   post_build:
     commands:
       - echo Build completed on `date`
@@ -27,5 +28,5 @@ phases:
 artifacts:
   files:
     - "**/*"
-  discard-paths: yes
+  discard-paths: no
   base-directory: dist
