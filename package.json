@@ -8,7 +8,7 @@
         "start": "node --max_old_space_size=6168 node_modules/@angular/cli/bin/ng serve",
         "build": "node --max_old_space_size=12288 ./node_modules/@angular/cli/bin/ng build --output-hashing all",
         "prodBuild": "node --max-old-space-size=12288 ./node_modules/@angular/cli/bin/ng build --aot --configuration prod",
-        "preProdBuild": "node --max_old_space_size=8082 ./node_modules/@angular/cli/bin/ng build --configuration preprod",
+        "preProdBuild": "node --max_old_space_size=12288 ./node_modules/@angular/cli/bin/ng build --configuration preprod",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
