@@ -19,6 +19,7 @@ phases:
       - n 12.0.0
       - npx -n=--max-old-space-size=4096 ng build --aot --configuration prod
       - pwd
+      - ls
   post_build:
     commands:
       - echo Build completed on `date`
