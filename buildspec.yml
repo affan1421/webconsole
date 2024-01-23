@@ -13,6 +13,7 @@ phases:
   pre_build:
     commands:
       - npm i
+      - npm cache clean --force
   build:
     commands:
       - npm i -g n
