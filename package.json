@@ -13,7 +13,10 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-        "rtl": "webpack"
+        "rtl": "webpack",
+        "audit": "npm audit",
+        "audit-fix": "npm audit fix"
+
     },
     "private": true,
     "dependencies": {
